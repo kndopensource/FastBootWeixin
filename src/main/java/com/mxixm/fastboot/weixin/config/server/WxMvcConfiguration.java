@@ -18,7 +18,6 @@ package com.mxixm.fastboot.weixin.config.server;
 
 import com.mxixm.fastboot.weixin.annotation.EnableWxMvc;
 import com.mxixm.fastboot.weixin.config.WxProperties;
-import com.mxixm.fastboot.weixin.module.Wx;
 import com.mxixm.fastboot.weixin.module.menu.DefaultWxButtonEventKeyStrategy;
 import com.mxixm.fastboot.weixin.module.menu.WxButtonEventKeyStrategy;
 import com.mxixm.fastboot.weixin.module.menu.WxMenuManager;
@@ -49,7 +48,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportAware;
@@ -141,15 +139,15 @@ public class WxMvcConfiguration implements ImportAware {
 
     /**
      * 0.6.2使用WxXmlMessageConverter替换
-    @Bean
-    public WxMessageResponseBodyAdvice wxMessageResponseBodyAdvice() {
-        return new WxMessageResponseBodyAdvice(wxMessageProcessor);
-    }
+     @Bean
+     public WxMessageResponseBodyAdvice wxMessageResponseBodyAdvice() {
+     return new WxMessageResponseBodyAdvice(wxMessageProcessor);
+     }
 
-    @Bean
-    public WxStringResponseBodyAdvice wxStringResponseBodyAdvice() {
-        return new WxStringResponseBodyAdvice(wxMessageProcessor);
-    }
+     @Bean
+     public WxStringResponseBodyAdvice wxStringResponseBodyAdvice() {
+     return new WxStringResponseBodyAdvice(wxMessageProcessor);
+     }
      **/
 
     @Bean

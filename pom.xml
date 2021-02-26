@@ -5,7 +5,7 @@
 
     <groupId>com.mxixm</groupId>
     <artifactId>fastboot-weixin</artifactId>
-    <version>0.7.0-SNAPSHOT</version>
+    <version>0.7.0-release</version>
     <packaging>jar</packaging>
 
     <name>FastBootWeixin</name>
@@ -57,12 +57,12 @@
     <!--</parent>-->
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <wx.httpclient.core.version>4.4.13</wx.httpclient.core.version>
         <wx.httpclient.version>4.5.6</wx.httpclient.version>
-        <!--<wx.springboot.version>2.0.2.RELEASE</wx.springboot.version>-->
-        <wx.springboot.version>1.5.6.RELEASE</wx.springboot.version>
+        <wx.springboot.version>2.3.5.RELEASE</wx.springboot.version>
     </properties>
 
     <!-- Add typical dependencies for a web application -->
@@ -73,6 +73,11 @@
             <version>${wx.springboot.version}</version>
             <scope>provided</scope>
         </dependency>
+        <!--<dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>${wx.httpclient.core.version}</version>
+        </dependency>-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
@@ -102,18 +107,32 @@
             <scope>provided</scope>
             <optional>true</optional>
         </dependency>
-
-        <!--<dependency>-->
-            <!--<groupId>com.sun.xml.bind</groupId>-->
-            <!--<artifactId>jaxb-impl</artifactId>-->
-            <!--<version>2.3.2</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency>
         <!--&lt;!&ndash; https://mvnrepository.com/artifact/com.sun.istack/istack-commons-runtime &ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>com.sun.istack</groupId>-->
-            <!--<artifactId>istack-commons-runtime</artifactId>-->
-            <!--<version>3.0.8</version>-->
-        <!--</dependency>-->
+        <!-- <dependency>
+             <groupId>com.sun.istack</groupId>
+             <artifactId>istack-commons-runtime</artifactId>
+             <version>3.0.8</version>
+         </dependency>-->
 
     </dependencies>
     <!-- Package as an executable jar -->
@@ -123,8 +142,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                     <compilerArguments>
                         <bootclasspath>${java.home}/lib/rt.jar${path.separator}${java.home}/lib/jce.jar</bootclasspath>
                     </compilerArguments>

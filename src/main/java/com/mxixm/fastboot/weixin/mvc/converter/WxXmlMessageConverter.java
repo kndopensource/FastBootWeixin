@@ -24,7 +24,7 @@ import com.mxixm.fastboot.weixin.module.message.parameter.WxMessageParameter;
 import com.mxixm.fastboot.weixin.module.web.WxRequest;
 import com.mxixm.fastboot.weixin.service.WxXmlCryptoService;
 import com.mxixm.fastboot.weixin.util.WxWebUtils;
-import com.sun.xml.internal.bind.marshaller.CharacterEscapeHandler;
+import com.sun.xml.bind.marshaller.CharacterEscapeHandler;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpHeaders;
@@ -98,7 +98,7 @@ public class WxXmlMessageConverter extends Jaxb2RootElementHttpMessageConverter 
     }
 
     @Override
-    protected Object readFromSource(Class<?> clazz, HttpHeaders headers, Source source) throws IOException {
+    protected Object readFromSource(Class<?> clazz, HttpHeaders headers, Source source) throws Exception {
         Assert.isAssignable(WxRequest.Body.class, clazz, "错误的使用了消息转化器");
         WxRequest wxRequest = WxWebUtils.getWxRequestFromRequest();
         WxRequest.Body body = (WxRequest.Body) super.readFromSource(clazz, headers, source);
@@ -120,7 +120,7 @@ public class WxXmlMessageConverter extends Jaxb2RootElementHttpMessageConverter 
     }
 
     @Override
-    protected void writeToResult(Object o, HttpHeaders headers, Result result) throws IOException {
+    protected void writeToResult(Object o, HttpHeaders headers, Result result) throws Exception {
         WxRequest wxRequest = WxWebUtils.getWxRequestFromRequest();
         WxMessage wxMessage = processObject(o);
         if (!wxRequest.isEncrypted()) {
